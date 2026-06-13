@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="5">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Network Anomaly Detection Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="container-fluid p-4">
+
+    <!-- Header -->
+
+    <div class="dashboard-header mb-4">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+            <div>
+                <h1 class="title">
+                    🛡 AI Network Anomaly Detection Dashboard
+                </h1>
+
+                <p class="subtitle">
+                    Real-Time Network Traffic Monitoring & Threat Detection
+                </p>
+            </div>
+
+            <div class="text-end">
+
+                <div id="clock" class="clock mb-2"></div>
+
+                <a href="/logout" class="btn btn-danger">
+                    🚪 Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Alert -->
+
+    {% if attack_packets > 0 %}
+
+    <div class="alert security-alert mt-3">
+
+        🚨 SECURITY ALERT
+
+        <br>
+
+        {{ attack_packets }} suspicious packets detected
+
+    </div>
+
+    {% endif %}
+
+    <!-- Statistics Cards -->
+
+    <div class="row g-4 mt-2">
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card stat-card">
+
+                <div class="icon">📦</div>
+
+                <h2>{{ total_packets }}</h2>
+
+                <p style="color: #0cd7f1;">Total Packets</p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card stat-card">
+
+                <div class="icon">🌐</div>
+
+                <h2>{{ tcp_packets }}</h2>
+
+                <p style="color: #0cd7f1;">TCP Traffic</p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card stat-card">
+
+                <div class="icon">⚡</div>
+
+                <h2>{{ udp_packets }}</h2>
+
+                <p style="color: #0cd7f1;">UDP Traffic</p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card attack-card">
+
+                <div class="icon">🚨</div>
+
+                <h2>{{ attack_packets }}</h2>
+
+                <p style="color: #f01414;">Threats Detected</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Charts -->
+
+    <div class="row mt-4 g-4">
+
+        <div class="col-lg-6">
+
+            <div class="chart-box">
+
+                <h4 class="text-center mb-3">
+                    📊 Protocol Distribution
+                </h4>
+
+                <canvas id="protocolChart"></canvas>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6">
+
+            <div class="chart-box">
+
+                <h4 class="text-center mb-3">
+                    📈 Traffic Analysis
+                </h4>
+
+                <canvas id="trafficChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Live Packet Monitoring -->
+
+    <div class="table-box mt-4">
+
+        <h3 class="mb-4">
+            🔍 Live Packet Monitoring
+        </h3>
+
+        <div class="table-responsive">
+
+            <table class="table table-dark table-hover align-middle">
+
+                <thead>
+
+                <tr>
+
+                    <th>Protocol</th>
+                    <th>Packet Size</th>
+                    <th>Hour</th>
+                    <th>Minute</th>
+                    <th>Second</th>
+                    <th>Status</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for row in recent_packets %}
+
+                <tr>
+
+                    <td>
+
+                        {% if row.Protocol == 0 %}
+                        TCP
+                        {% elif row.Protocol == 1 %}
+                        UDP
+                        {% else %}
+                        ICMP
+                        {% endif %}
+
+                    </td>
+
+                    <td>{{ row.Packet_Size }}</td>
+
+                    <td>{{ row.Hour }}</td>
+
+                    <td>{{ row.Minute }}</td>
+
+                    <td>{{ row.Second }}</td>
+
+                    <td>
+
+                        {% if row.Label == 1 %}
+
+                        <span class="badge bg-danger">
+                            Attack
+                        </span>
+
+                        {% else %}
+
+                        <span class="badge bg-success">
+                            Normal
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="text-center mt-5">
+
+        <hr>
+
+        <p class="footer-text">
+
+            AI Network Anomaly Detection Dashboard
+
+            <br>
+
+            Powered by Flask • Machine Learning • Cyber Security
+
+        </p>
+
+    </footer>
+
+</div>
+
+<!-- Protocol Chart -->
+
+<script>
+
+new Chart(
+document.getElementById("protocolChart"),
+{
+type:"doughnut",
+
+data:{
+labels:["TCP","UDP"],
+
+datasets:[{
+
+data:[
+{{ tcp_packets }},
+{{ udp_packets }}
+],
+
+backgroundColor:[
+"#00ffff",
+"#00ff88"
+],
+
+borderWidth:2
+
+}]
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+legend:{
+labels:{
+color:"white"
+}
+}
+}
+
+}
+
+}
+);
+
+</script>
+
+<!-- Traffic Chart -->
+
+<script>
+
+new Chart(
+document.getElementById("trafficChart"),
+{
+type:"bar",
+
+data:{
+
+labels:["Normal","Attack"],
+
+datasets:[{
+
+label:"Traffic Packets",
+
+data:[
+{{ normal_packets }},
+{{ attack_packets }}
+],
+
+backgroundColor:[
+"#00ff88",
+"#ff4444"
+]
+
+}]
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+legend:{
+labels:{
+color:"white"
+}
+}
+},
+
+scales:{
+
+y:{
+ticks:{
+color:"white"
+}
+},
+
+x:{
+ticks:{
+color:"white"
+}
+}
+
+}
+
+}
+
+}
+);
+
+</script>
+
+<!-- Live Clock -->
+
+<script>
+
+function updateClock(){
+
+const now = new Date();
+
+document.getElementById("clock").innerHTML =
+"🕒 " + now.toLocaleTimeString();
+
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+</script>
+
+</body>
+</html>

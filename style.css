@@ -1,0 +1,159 @@
+body{
+    background: linear-gradient(135deg,#020617,#0f172a,#111827);
+    color:white;
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    padding:20px;
+}
+
+/* Dashboard Title */
+.title{
+    text-align:center;
+    font-size:42px;
+    font-weight:700;
+    color:#00ffff;
+    text-shadow:
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 40px #00ffff;
+    margin-bottom:30px;
+    letter-spacing:2px;
+}
+
+/* Common Card Style */
+.stat-card,
+.attack-card,
+.chart-box,
+.table-box{
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius:20px;
+    padding:25px;
+    transition:0.4s ease;
+    overflow:hidden;
+    position:relative;
+}
+
+/* Neon Border Effect */
+.stat-card::before,
+.attack-card::before,
+.chart-box::before,
+.table-box::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:20px;
+    padding:2px;
+    background:linear-gradient(
+        45deg,
+        cyan,
+        #00ff88,
+        cyan
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+            mask-composite:exclude;
+}
+
+/* Stats Card */
+.stat-card{
+    background:rgba(15,23,42,0.8);
+    text-align:center;
+    box-shadow:
+        0 0 15px rgba(0,255,255,0.3),
+        0 0 30px rgba(0,255,255,0.15);
+}
+
+.stat-card:hover{
+    transform:translateY(-8px) scale(1.03);
+    box-shadow:
+        0 0 25px cyan,
+        0 0 50px rgba(0,255,255,0.4);
+}
+
+/* Attack Card */
+.attack-card{
+    background:rgba(43,11,11,0.8);
+    text-align:center;
+    box-shadow:
+        0 0 15px rgba(255,0,0,0.3),
+        0 0 30px rgba(255,0,0,0.15);
+}
+
+.attack-card:hover{
+    transform:translateY(-8px) scale(1.03);
+    box-shadow:
+        0 0 25px red,
+        0 0 50px rgba(255,0,0,0.4);
+}
+
+/* Numbers */
+.card h2,
+.stat-card h2,
+.attack-card h2{
+    font-size:48px;
+    font-weight:700;
+    margin-top:10px;
+}
+
+.stat-card h2{
+    color:#00ffff;
+}
+
+.attack-card h2{
+    color:#ff4d4d;
+}
+
+/* Chart Box */
+.chart-box{
+    background:rgba(15,23,42,0.8);
+    box-shadow:
+        0 0 20px rgba(0,255,255,0.15);
+}
+
+.chart-box:hover{
+    transform:translateY(-5px);
+}
+
+/* Table Box */
+.table-box{
+    background:rgba(15,23,42,0.8);
+    box-shadow:
+        0 0 20px rgba(0,255,255,0.15);
+}
+
+/* Table Styling */
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table th{
+    background:#00ffff20;
+    color:#00ffff;
+    padding:15px;
+}
+
+table td{
+    padding:12px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+table tr:hover{
+    background:rgba(0,255,255,0.08);
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .title{
+        font-size:30px;
+    }
+
+    .card h2,
+    .stat-card h2,
+    .attack-card h2{
+        font-size:35px;
+    }
+}

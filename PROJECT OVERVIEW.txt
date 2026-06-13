@@ -1,0 +1,172 @@
+AI-BASED NETWORK ANOMALY DETECTION USING MACHINE LEARNING
+======================================================== PROJECT OVERVIEW========================================================
+This project is designed to monitor network traffic in real time and detect abnormal or suspicious activitiesusing Machine Learning techniques.
+The system captures network packets, extracts important features, preprocesses the data, and uses aMachine Learning model to classify network traffic as Normal or Anomalous.
+The project also includes a modern web dashboard that displays network statistics, traffic analysis, andthreat detection information.
+======================================================== OBJECTIVES========================================================
+Capture live network traffic.
+Analyze packet information.
+Detect suspicious network behavior.
+Classify traffic using Machine Learning.
+Display network statistics through a dashboard.
+Generate alerts for detected anomalies.
+======================================================== TECHNOLOGIES USED========================================================
+Programming Language:
+Python 3.x
+Libraries:
+Scapy
+Pandas
+NumPy
+Scikit-Learn
+Flask
+Joblib
+Frontend:
+HTML5
+CSS3
+Bootstrap 5
+Chart.js
+1.
+2.
+3.
+4.
+5.
+6.
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+1
+Tools:
+Wireshark
+VS Code
+Git
+======================================================== PROJECT STRUCTURE========================================================
+AI-Based Network Anomaly Detection using Machine Learning
+│ ├── captures │ └── network_traffic.csv │ ├── preprocessing │ ├── data_cleaning.py │ └──feature_engineering.py │ ├── dataset │ └── ml_dataset.csv │ ├── model │ └── train_model.py│ ├── dashboard │ ├── app.py │ ├── templates │ │ └── index.html │ └── static │ └──style.css │ └── README.txt
+======================================================== SYSTEM WORKFLOW========================================================
+Packet Capture
+Scapy captures live network packets.
+Feature Extraction
+Source IP
+Destination IP
+Protocol
+Packet Size
+Timestamp
+Data Preprocessing
+Remove duplicates
+Remove missing values
+Convert protocol values
+Extract time features
+Machine Learning
+Train Random Forest Classifier
+Detect anomalies
+•
+•
+•
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+11.
+12.
+13.
+14.
+15.
+16.
+2
+Dashboard
+Display traffic statistics
+Show attack count
+Show protocol distribution
+Display recent packet logs
+======================================================== FEATURES========================================================
+✔ Real-Time Packet Monitoring
+✔ Network Traffic Analysis
+✔ Machine Learning-Based Detection
+✔ Bootstrap 5 Dashboard
+✔ Chart.js Visualization
+✔ Dark Cybersecurity Theme
+✔ Live Packet Monitoring Table
+✔ Attack Alert System
+✔ CSV Dataset Generation
+======================================================== INSTALLATION========================================================
+Step 1:
+Install Python 3.x
+Step 2:
+Install Required Packages
+pip install pandas
+pip install numpy
+pip install scapy
+17.
+18.
+19.
+20.
+21.
+3
+pip install flask
+pip install scikit-learn
+pip install joblib
+Step 3:
+Run Packet Capture
+python sniffer.py
+Step 4:
+Run Data Processing
+python feature_engineering.py
+Step 5:
+Run Dashboard
+python app.py
+======================================================== DASHBOARD ACCESS========================================================
+Open browser and visit:
+http://127.0.0.1:5000
+======================================================== FUTURE ENHANCEMENTS========================================================
+Real-Time Machine Learning Prediction
+DDoS Attack Detection
+Intrusion Detection System (IDS)
+Email Alert Notifications
+MySQL Database Integration
+User Authentication
+PDF Report Generation
+Cloud Deployment
+Network Traffic Heatmaps
+AI-Based Threat Intelligence
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+4
+======================================================== EXPECTED OUTPUT========================================================
+Captured Network Packets
+Processed Dataset
+ML Prediction Results
+Interactive Dashboard
+Threat Detection Statistics
+======================================================== DEVELOPER========================================================
+Name: Ganesh Jadhav
+Project Type: Final Year Networking and Machine Learning Project
+Academic Year: 2026
+======================================================== END OF FILE========================================================
+•
+•
+•
+•
+•
+5
